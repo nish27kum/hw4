@@ -3,10 +3,11 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: params["email"])
+    @user = User.find_by(email: params["email"]) 
+
     if @user && @user.authenticate(params["password"])
-      session["user_id"] = user.id
-      flash["notice"] = "Welcome, #{user.username}! Yayy, you are now logged in successfully!"
+      session["user_id"] = @user.id
+      flash["notice"] = "Welcome, #{@user.username}! Yayy, you are now logged in successfully!"
       redirect_to "/places"
     else
       flash["alert"] = "Oops, Invalid email or password!!"
@@ -16,8 +17,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session["user_id"] = nil
-    flash["notice"] = "Goodbye, You have logged out successfully!"
+    flash["notice"] = "You have been logged out successfully!"
     redirect_to "/login"
   end
 end
-
