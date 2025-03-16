@@ -1,16 +1,31 @@
-<h1><%= @place["name"] %></h1>
+<h1 class="mb-4"><%= @place.name %></h1>
 
-<h2>My Entries</h2>
-<% for entry in @entries %>
-  <h3><%= entry["title"] %></h3>
-  <h4><%= entry["occurred_on"] %></h4>
-  <p><%= entry["description"] %></p>
-<% end %>
-
+<!-- New Post Button -->
 <p>
-  <a href="/entries/new?place_id=<%= @place["id"] %>">New Entry</a>
+  <%= link_to "New Post", new_entry_path(place_id: @place.id), class: "btn btn-dark mb-4" %>
 </p>
 
+<!-- Entries Grid -->
+<div class="row">
+  <% @entries.each do |entry| %>
+    <div class="col-md-4">
+      <div class="card mb-3">
+        <% if entry.image.attached? %>
+          <%= image_tag entry.image, class: "card-img-top", alt: "Entry Image" %>
+        <% else %>
+          <img src="https://via.placeholder.com/300" class="card-img-top" alt="Placeholder Image">
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= entry.title %></h5>
+          <p class="card-text"><%= entry.occurred_on %></p>
+          <p class="card-text"><%= entry.description %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<!-- Back Button -->
 <p>
-  <a href="/places">Back to All Places</a>
+  <%= link_to "Back to All Places", places_path, class: "btn btn-outline-secondary" %>
 </p>

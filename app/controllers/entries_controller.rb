@@ -7,22 +7,23 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(entry_params)
-    @entry["user_id"] = @current_user.id  
-
+    @entry.user = @current_user
+  
     if @entry.save
       flash["notice"] = "Congrats, new entry created successfully!"
-      redirect_to "/places/#{@entry.place_id}"
+      redirect_to @entry.place
     else
-      flash["alert"] = "Failed to create entry, Please check your details"
+      flash["alert"] = "Failed to create entry, Please check your details!"
       render "new"
     end
   end
-
+  
   private
-
+  
   def entry_params
-    params.permit("title", "description", "occurred_on", "place_id")
+    params.require(:entry).permit(:title, :description, :occurred_on, :place_id, :image)
   end
+
 
   def require_login
     unless @current_user
