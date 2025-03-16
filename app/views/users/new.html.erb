@@ -1,29 +1,24 @@
 <h1>Sign Up</h1>
 
 <% if flash[:alert] %>
-  <div class="alert alert-danger"><%= flash[:alert] %></div>
+  <p style="color: red;"><%= flash[:alert] %></p>
 <% end %>
 
-<%= form_with model: @user, url: "/users", method: "post" do |form| %>
+<form action="/users" method="post">
   <p>
-    <%= form.label :username %>
-    <%= form.text_field :username %>
+    <label for="username">Username</label>
+    <input type="text" name="username" required>
   </p>
-
+  
   <p>
-    <%= form.label :email %>
-    <%= form.email_field :email %>
+    <label for="email">Email</label>
+    <input type="email" name="email" required>
   </p>
-
+  
   <p>
-    <%= form.label :password %>
-    <%= form.password_field :password %>
+    <label for="password">Password</label>
+    <input type="password" name="password" required>
   </p>
-
-  <p>
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
-  </p>
-
-  <%= form.submit "Sign Up" %>
-<% end %>
+  
+  <button>Signup</button>
+</form>
