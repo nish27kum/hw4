@@ -1,27 +1,31 @@
-<h1>Signup</h1>
+<div class="container">
+  <h1 class="mb-4">Sign Up</h1>
 
-<%= form_with model: @user, local: true do |form| %>
-  <div>
-    <%= form.label :name, "Username:" %>
-    <%= form.text_field :name %>
-  </div>
+  <%= form_with url: "/users", local: true, html: { class: "needs-validation" } do |form| %>
+    <div class="mb-4"> 
+      <%= form.label :name, "Name:", class: "form-label" %>
+      <%= form.text_field :name, class: "form-control", required: true %>
+    </div>
 
-  <div>
-    <%= form.label :email, "Email:" %>
-    <%= form.email_field :email %>
-  </div>
+    <div class="mb-4">
+      <%= form.label :email, "Email:", class: "form-label" %>
+      <%= form.email_field :email, class: "form-control", required: true %>
+    </div>
 
-  <div>
-    <%= form.label :password, "Password:" %>
-    <%= form.password_field :password %>
-  </div>
+    <div class="mb-4">
+      <%= form.label :password, "Password:", class: "form-label" %>
+      <%= form.password_field :password, class: "form-control", required: true %>
+    </div>
 
-  <div>
-    <%= form.label :password_confirmation, "Confirm Password:" %>
-    <%= form.password_field :password_confirmation %>
-  </div>
+    <div class="mb-4">
+      <%= form.label :password_confirmation, "Confirm Password:", class: "form-label" %>
+      <%= form.password_field :password_confirmation, class: "form-control", required: true %>
+    </div>
 
-  <div>
-    <%= form.submit "Sign Up" %>
-  </div>
-<% end %>
+    <div class="text-end">
+      <%= form.submit "Sign Up", class: "btn btn-success" %>
+    </div>
+  <% end %>
+
+  <%= link_to "Back to Login", "/login", class: "btn btn-outline-secondary mt-3" %>
+</div>
