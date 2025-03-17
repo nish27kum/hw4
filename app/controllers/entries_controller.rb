@@ -7,22 +7,22 @@ class EntriesController < ApplicationController
   end
 
   def create
-    @entry = Entry.new(
-      title: params[:title],
-      description: params[:description],
-      occurred_on: params[:occurred_on],
-      place_id: params[:place_id],
-      user_id: session[:user_id]
-    )
+    @place = Place.find(params[:place_id])  
+    @entry = @place.entries.new(entry_params)  
+    @entry.user_id = session[:user_id]  
 
     if @entry.save
       redirect_to "/places/#{@entry.place_id}"
     else
-      render :new
+      render "new"
     end
   end
 
   private
+
+  def entry_params
+    params.require(:entry).permit(:title, :description, :occurred_on, :image)  
+  end
 
   def require_login
     redirect_to "/login" unless session[:user_id]

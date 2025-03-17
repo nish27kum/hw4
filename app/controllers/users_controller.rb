@@ -7,11 +7,11 @@ class UsersController < ApplicationController
     @user = User.new(user_params)  
 
     if @user.save
-      session[:user_id] = @user.id  
-      flash["notice"] = "Welcome, #{@user.name}, Your account has been created!" 
+      session[:user_id] = @user.id
+      flash[:notice] = "Welcome, #{@user.name}! Your account has been created successfully!"
       redirect_to "/places"
     else
-      flash["alert"] = "Alert, Signup failed!" 
+      flash[:alert] = "Alert, Signup failed!" 
       render :new
     end
   end
