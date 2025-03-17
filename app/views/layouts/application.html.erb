@@ -6,13 +6,11 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <!-- Bootstrap & Custom Styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <%= stylesheet_link_tag "application", media: "all" %>
   </head>
 
   <body>
-    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <a class="navbar-brand" href="/">The Travel'log'ue Journal!</a>
@@ -44,13 +42,12 @@
       </div>
     </nav>
 
-    <!-- Navigation Buttons -->
     <div class="container mt-3 d-flex justify-content-between">
       <button class="btn btn-outline-secondary" onclick="history.back()"> Back</button>
       <button class="btn btn-outline-primary" onclick="history.forward()">Next </button>
     </div>
 
-    <!-- Flash Messages (Success, Errors, Notices) -->
+  
     <div class="container mt-3">
       <% if flash[:notice] %>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -66,12 +63,10 @@
       <% end %>
     </div>
 
-    <!-- Main Content -->
     <div class="container mt-4">
       <%= yield %> 
     </div>
 
-    <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
