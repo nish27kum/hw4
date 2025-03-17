@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      flash["notice"] = "Welcome, #{@user.username}, You are now logged in!"
+      flash["notice"] = "Welcome, #{user.name}, You are now logged in!"
       redirect_to "/places"
     else
       redirect_to "/login", alert: "Invalid email or password"

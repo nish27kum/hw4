@@ -1,23 +1,18 @@
 <h1 class="mb-4"><%= @place.name %></h1>
 
-<!-- New Post Button -->
 <p>
-  <%= link_to "New Post", new_entry_path(place_id: @place.id), class: "btn btn-dark mb-4" %>
+  <%= link_to "New Post", new_place_entry_path(@place), class: "btn btn-dark mb-4" %>
 </p>
 
-<!-- Entries Grid -->
+
 <div class="row">
   <% @entries.each do |entry| %>
     <div class="col-md-4">
       <div class="card mb-3">
-        <% if entry.image.attached? %>
-          <%= image_tag entry.image, class: "card-img-top", alt: "Entry Image" %>
-        <% else %>
-          <img src="https://via.placeholder.com/300" class="card-img-top" alt="Placeholder Image">
-        <% end %>
+        <%= entry.image.attached? ? image_tag(entry.image, class: "card-img-top", alt: "Entry Image") : image_tag("https://via.placeholder.com/300", class: "card-img-top", alt: "Placeholder Image") %>
         <div class="card-body">
           <h5 class="card-title"><%= entry.title %></h5>
-          <p class="card-text"><%= entry.occurred_on %></p>
+          <p class="card-text"><strong>Date:</strong> <%= entry.occurred_on %></p>
           <p class="card-text"><%= entry.description %></p>
         </div>
       </div>
@@ -25,7 +20,7 @@
   <% end %>
 </div>
 
-<!-- Back Button -->
+
 <p>
   <%= link_to "Back to All Places", places_path, class: "btn btn-outline-secondary" %>
 </p>

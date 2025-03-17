@@ -15,7 +15,9 @@ class PlacesController < ApplicationController
   end
 
   def create
-    @place = Place.new(name: params[:name], user_id: session[:user_id])
+    @place = Place.new(name: params[:name])
+    @place.user_id = session[:user_id] 
+
     if @place.save
       redirect_to "/places"
     else
@@ -28,4 +30,5 @@ class PlacesController < ApplicationController
   def require_login
     redirect_to "/login" unless session[:user_id]
   end
+  
 end
