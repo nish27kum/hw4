@@ -1,22 +1,31 @@
 class PlacesController < ApplicationController
+  before_action :require_login
 
   def index
-    @places = Place.all
+    @places = Place.where(user_id: session[:user_id])
   end
 
   def show
-    @place = Place.find_by({ "id" => params["id"] })
-    @entries = Entry.where({ "place_id" => @place["id"], "user_id" => session[:user_id] })
+    @place = Place.find(params[:id])
+    @entries = @place.entries.where(user_id: session[:user_id])
   end
 
   def new
+    @place = Place.new
   end
 
   def create
-    @place = Place.new
-    @place["name"] = params["name"]
-    @place.save
-    redirect_to "/places"
+    @place = Place.new(name: params[:name], user_id: session[:user_id])
+    if @place.save
+      redirect_to "/places"
+    else
+      render :new
+    end
   end
 
+  private
+
+  def require_login
+    redirect_to "/login" unless session[:user_id]
+  end
 end

@@ -5,21 +5,19 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
     if @user.save
-      session["user_id"] = @user.id
-      flash["notice"] = "Welcome, #{@user.username}! Your account has been created."
+      session[:user_id] = @user.id
+      flash["notice"] = "Welcome, #{@user.username}, Your account has been created!" 
       redirect_to "/places"
     else
-      flash["alert"] = "Signup failed: " + @user.errors.full_messages.join(", ")
-      redirect_to "/users/new"
+      flash["alert"] = "Alert, Signup failed!" 
+      render :new
     end
   end
 
   private
 
   def user_params
-    params.permit(:username, :email, :password)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end
-
