@@ -21,11 +21,8 @@ test:
   database: db/test.sqlite3
 
 production:
-  production:
   adapter: postgresql
-  encoding: unicode
-  pool: 5
   database: travelogue_production
   username: travelogue
-  password: <%= ENV["DATABASE_PASSWORD"] %>
-  host: <%= ENV["DATABASE_HOST"] %>
+  password: <%= ENV["TRAVELLOGUE_DATABASE_PASSWORD"] %>
+ 
