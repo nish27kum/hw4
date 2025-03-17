@@ -1,7 +1,8 @@
 <div class="container">
-  <h1 class="mb-4">Sign Up</h1>
+  <h1 class="mb-4 text-center">Sign Up</h1>
 
-  <%= form_with url: "/users", local: true, html: { class: "needs-validation" } do |form| %>
+  <%= form_with model: @user, url: "/users", scope: :user, local: true, html: { class: "needs-validation" } do |form| %>
+    
     <div class="mb-4"> 
       <%= form.label :name, "Name:", class: "form-label" %>
       <%= form.text_field :name, class: "form-control", required: true %>
@@ -22,10 +23,16 @@
       <%= form.password_field :password_confirmation, class: "form-control", required: true %>
     </div>
 
+    <% if flash[:alert] %>
+      <div class="alert alert-danger"><%= flash[:alert] %></div>
+    <% end %>
+
     <div class="text-end">
       <%= form.submit "Sign Up", class: "btn btn-success" %>
     </div>
   <% end %>
 
-  <%= link_to "Back to Login", "/login", class: "btn btn-outline-secondary mt-3" %>
+  <div class="text-center mt-4">
+    <%= link_to "Back to Login", "/login", class: "btn btn-outline-secondary" %>
+  </div>
 </div>
